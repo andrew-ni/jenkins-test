@@ -19,7 +19,6 @@ pipeline {
                     try {
                         echo 'Running flake8...'
                         sh 'flake8 jenkins_test/'
-                        sh 'exit 1'
                     } catch(err) {
                         echo 'flake8 validation failed!'
                         currentBuild.result = 'UNSTABLE'
