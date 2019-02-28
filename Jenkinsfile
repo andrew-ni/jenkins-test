@@ -11,6 +11,7 @@ pipeline {
                 sh 'python --version'
                 sh 'pip install --upgrade pip'
                 sh 'pip install -r test-requirements.txt'
+                sh 'echo asdfasdf'
             }
         }
         stage('flake8') {
