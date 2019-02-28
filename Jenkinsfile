@@ -9,6 +9,7 @@ pipeline {
         stage('build') {
             steps {
                 sh 'python --version'
+                sh 'pip install -r test-requirements.txt'
             }
         }
         stage('flake8') {
@@ -18,7 +19,6 @@ pipeline {
         }
         stage('test') {
             steps {
-                sh 'pip install pytest'
                 sh 'pytest'
             }
         }
