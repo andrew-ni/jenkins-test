@@ -15,13 +15,40 @@ pipeline {
         }
         stage('flake8') {
             steps {
-                sh 'flake8'
+                script {
+                    try {
+                        echo 'Running flake8...'
+                        sh 'flake8 jenkins_test/'
+                        sh 'exit 1'
+                    } catch(err) {
+                        echo 'flake8 validation failed!'
+                        currentBuild.result = 'UNSTABLE'
+                    }
+                }
             }
         }
         stage('test') {
             steps {
                 sh 'pytest'
             }
+        }
+    }
+    post {
+        always {
+            echo 'This will always run after jenkins finishes'
+        }
+        success {
+            echo 'This will run only if successful. no errors during processing. good to archive successful builds'
+        }
+        failure {
+            echo 'This will run only if failed. send feedback to team, via email or slack, requires urgent attention, can be used to rollback to last successful build'
+        }
+        unstable {
+            echo 'This will run only if the run was marked as unstable'
+        }
+        changed {
+            echo 'This will run only if the state of the Pipeline has changed'
+            echo 'For example, if the Pipeline was previously failing but is now successful'
         }
     }
 }
