@@ -11,6 +11,11 @@ pipeline {
                 sh 'python --version'
             }
         }
+        stage('flake8') {
+            steps {
+                sh 'flake8'
+            }
+        }
         stage('test') {
             steps {
                 sh 'pip install pytest'
