@@ -1,4 +1,4 @@
 def test_0():
     print('asdf')
-    print('aaasdf')
+    print('aaaasdf')
     assert True
