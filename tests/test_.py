@@ -1,3 +1,3 @@
 def test_0():
-    print('asdaf')
+    print('asdaaf')
     assert True
